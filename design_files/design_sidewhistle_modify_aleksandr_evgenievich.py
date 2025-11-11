@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env pypy
 # -*- coding: utf-8 -*-
 #
 # Флейта для Александра Евгеньевича - транспонирована на 1 тон ниже (Bb вместо C)
@@ -9,17 +9,20 @@ from demakein.design import Instrument_designer, wavelength
 from demakein.legion import run_tool
 
 class Flute_Aleksandr_Evgenievich(Instrument_designer):
-    closed_top = False
+    closed_top = True
     transpose = 10  # Изменено с 12 на 10 (1 тон ниже = -2 полутона)
 
     # Изменяем значение embextra
     embextra = 0.53  # По умолчанию
 
-    n_holes = 10  # including embouchure hole
+    n_holes = 11  # including embouchure hole
 
-    min_hole_diameters = [2.5, 4.5, 6.0, 3.0, 4.5, 2.5, 5.5, 5.5, 3.5, 5.5]
-    max_hole_diameters = [2.8, 4.8, 8.0, 5.0, 7.5, 3.9, 7.5, 7.5, 5.5, 7.5]
-    hole_horiz_angles = [-15.0, 0.0, 0.0, 180.0, 0.0, 15.0, 0.0, 0.0, -105.0, 0.0]
+    inner_diameters = [10.0, 16.0]
+    outer_diameters = [16.0, 23.0]
+
+    min_hole_diameters = [2.5, 4.5, 6.0, 3.0, 4.5, 2.5, 5.5, 5.5, 3.5, 5.5, 9.5]
+    max_hole_diameters = [2.8, 4.8, 8.0, 5.0, 7.5, 3.9, 7.5, 7.5, 5.5, 7.5, 10.5]
+    hole_horiz_angles = [-15.0, 0.0, 0.0, 180.0, 0.0, 15.0, 0.0, 0.0, -105.0, 0.0, 0.0]
 
     # Аппликатуры транспонированы на 1 тон ниже
     # Fingerings transposed down by 1 whole tone
