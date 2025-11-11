@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+
+# Output directories
+output/
+output_*/
+
+# Data files
+*.pickle
+
+# Compiled executables
+*.exe
+
+# Archives
+*.zip
+
+# PyPy
+pypy/
+
+# Demakein package (separate git repo)
+demakein/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
