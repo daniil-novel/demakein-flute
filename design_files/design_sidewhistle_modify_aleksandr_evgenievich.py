@@ -1,25 +1,26 @@
-#!/usr/bin/env pypy
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 # Флейта для Александра Евгеньевича - транспонирована на 1 тон ниже (Bb вместо C)
 # Flute for Aleksandr Evgenievich - transposed 1 whole tone lower (Bb instead of C)
 
-import demakein, nesoni
-from demakein import design, design_flute
+import os
+from demakein.design import Instrument_designer, wavelength
+from demakein.legion import run_tool
 
-class Design_shaku(design_flute.Tapered_flute):#(demakein.Design_recorder):
+class Flute_Aleksandr_Evgenievich(Instrument_designer):
+    closed_top = False
     transpose = 10  # Изменено с 12 на 10 (1 тон ниже = -2 полутона)
 
-    n_holes = 10+1 # including embouchure hole
+    # Изменяем значение embextra
+    embextra = 0.53  # По умолчанию
 
-    min_hole_diameters = [ 2.5,4.5,6.0, 3.0,4.5, 2.5,5.5,5.5, 3.5,5.5, 9.5 ]
-    max_hole_diameters = [ 2.8,4.8,8.0, 5.0,7.5, 3.9,7.5,7.5, 5.5,7.5, 10.0 ]
-    # horiz_angles = [ -15.0 ] + [ 0.0 ] * 6 + [ 180.0 ]
-    hole_horiz_angles = [ -15.0, 0.0, 0.0, 180.0, 0.0,  15.0, 0.0, 0.0, -105.0, 0.0]
-    # hole_angles = [ -30, 0, 0, 30, 0 ]
+    n_holes = 10  # including embouchure hole
 
-    # balance = [None, None, 0.05, None ]
-    
+    min_hole_diameters = [2.5, 4.5, 6.0, 3.0, 4.5, 2.5, 5.5, 5.5, 3.5, 5.5]
+    max_hole_diameters = [2.8, 4.8, 8.0, 5.0, 7.5, 3.9, 7.5, 7.5, 5.5, 7.5]
+    hole_horiz_angles = [-15.0, 0.0, 0.0, 180.0, 0.0, 15.0, 0.0, 0.0, -105.0, 0.0]
+
     # Аппликатуры транспонированы на 1 тон ниже
     # Fingerings transposed down by 1 whole tone
     fingerings = [
@@ -83,11 +84,9 @@ class Design_shaku(design_flute.Tapered_flute):#(demakein.Design_recorder):
     
     # Начальная длина изменена для Bb3 вместо C4
     # Initial length changed for Bb3 instead of C4
-    initial_length = design.wavelength('Bb3') * 0.5
+    initial_length = wavelength('Bb3') * 0.5
 
 
 
 if __name__ == '__main__':
-    nesoni.run_toolbox(
-        [ Design_shaku, demakein.Make_flute ],
-        show_make_flags=False)
+    run_tool(Flute_Aleksandr_Evgenievich)
