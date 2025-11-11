@@ -1,8 +1,10 @@
 #!/usr/bin/env pypy
 # -*- coding: utf-8 -*-
 
-import demakein, nesoni
+import demakein
 from demakein import design, design_flute
+import sys
+import os
 
 class Design_shaku(design_flute.Tapered_flute):#(demakein.Design_recorder):
     transpose = 12 # 12 # 4 # 7
@@ -82,8 +84,26 @@ class Design_shaku(design_flute.Tapered_flute):#(demakein.Design_recorder):
 
 
 if __name__ == '__main__':
-    nesoni.run_toolbox(
-        [ Design_shaku, demakein.Make_flute ],
-        show_make_flags=False)
-
+    # Simple argument parser to replace nesoni.run_toolbox
+    if len(sys.argv) < 2:
+        print("Usage: python design_sidewhistle_initial.py <output_dir> [--workers N]")
+        sys.exit(1)
     
+    output_dir = sys.argv[1]
+    
+    # Parse workers argument if provided
+    workers = None
+    for i, arg in enumerate(sys.argv):
+        if arg == '--workers' and i + 1 < len(sys.argv):
+            workers = int(sys.argv[i + 1])
+            break
+    
+    # Create output directory if it doesn't exist
+    os.makedirs(output_dir, exist_ok=True)
+    
+    # Create and run the design
+    design_instance = Design_shaku()
+    design_instance.output_dir = output_dir
+    if workers is not None:
+        design_instance.n_worker_processes = workers
+    design_instance.run()
